@@ -1,7 +1,7 @@
 .card-wrapper-product {
   max-width: 1100px;
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 1.5rem;
 
   border-radius: 5rem;
 }
@@ -192,4 +192,22 @@
   .product-content {
     padding-top: 0;
   }
+}
+/////
+
+fieldset,
+input[type="button"] {
+  border: 0;
+}
+input[type="button"] {
+  background-color: #cec7c6;
+  color: #fff;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+input[type="text"] {
+  border: 1px solid #f4f3f3;
+  height: 22px;
+  width: 50px;
 }

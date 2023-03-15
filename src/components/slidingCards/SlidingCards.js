@@ -1,80 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Col, Row, Container } from "react-bootstrap";
+import React from "react";
+import "./SlidingCards.css";
 import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import { fetchProducts } from "../../store/ProductSlice";
-import { STATUSES } from "../../store/ProductSlice";
+import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import "./Products.css";
-const Products = () => {
+import { motion } from "framer-motion";
+import { fetchProducts } from "../../store/ProductSlice";
+const SlidingCards = () => {
   const dispatch = useDispatch();
-  const { data: products, status } = useSelector((state) => state.product);
-  const limitData = products.filter((_, index) => index < 10);
+  const { data: products } = useSelector((state) => state.product);
+  const limitproducts = products.filter((_, index) => index < 4);
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
-  if (status === STATUSES.LOADING) {
-    return (
-      <div className="text-center mt-5">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (status === STATUSES.ERROR) {
-    return <h2>Something went wrong!</h2>;
-  }
   return (
     <>
-      <nav className=" container navbar navbar-expand-md navbar-light bg-white">
-        <div className="container-fluid p-0">
-          {" "}
-          <a className="navbar-brand text-uppercase fw-800" href="#">
-            <span className="border-red pe-2">Sale</span>Product
-          </a>{" "}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#myNav"
-            aria-controls="myNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            {" "}
-            <span className="fas fa-bars"></span>{" "}
-          </button>
-          <div className="collapse navbar-collapse" id="myNav">
-            <div className="navbar-nav ms-auto">
-              {" "}
-              <a className="nav-link active" aria-current="page" href="#">
-                All
-              </a>{" "}
-              <a className="nav-link" href="#">
-                Women's
-              </a>{" "}
-              <a className="nav-link" href="#">
-                Men's
-              </a>{" "}
-              <a className="nav-link" href="#">
-                Kid's
-              </a>{" "}
-              <a className="nav-link" href="#">
-                Accessories
-              </a>{" "}
-              <a className="nav-link" href="#">
-                Cosmetics
-              </a>{" "}
-            </div>
-          </div>
+      <div className="container">
+        <div className="fw-bold fs-4">
+          <span className="border-red pe-2 ">Featured</span>Product
         </div>
-      </nav>
-
-      <Container>
         <motion.div
           className="about_right"
           initial={{ x: 0, opacity: 0 }}
@@ -82,7 +23,7 @@ const Products = () => {
           transition={{ duration: 1 }}
         >
           <Row className="w-100">
-            {limitData.map((product) => (
+            {limitproducts.map((product) => (
               <Col key={product.id} sm={12} md={6} lg={4} xl={3}>
                 <div
                   className="container bg-light shadow rounded"
@@ -129,9 +70,8 @@ const Products = () => {
             ))}
           </Row>
         </motion.div>
-      </Container>
+      </div>
     </>
   );
 };
-
-export default Products;
+export default SlidingCards;
